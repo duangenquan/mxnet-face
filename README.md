@@ -1,4 +1,44 @@
-Using [MXNet](https://github.com/dmlc/mxnet) for Face-related Algorithm
+# Using [MXNet](https://github.com/dmlc/mxnet) for Face-related Algorithm
+
+This code is forked from https://github.com/tornadomeet/mxnet-face.
+
+Updates are:
++ A demo for showing face attributes in camera streams
++ An easy setup instructions
+
+# Setup Instructions
+-----------
+
+Install mxnet (face) branch following https://mxnet.incubator.apache.org/install/index.html
+```
+unzip mxnet.zip
+cd mxnet
+make -j 4 USE_OPENCV=1 USE_BLAS=openblas
+sudo apt-get install -y python-dev python-setuptools python-pip libgfortran3
+cd python
+pip install --upgrade pip
+pip install -e .
+
+```
+
+Install python libs
+```
+pip install dlib
+```
+
+Download models
+```
+cd model
+./get-models.sh
+```
+
+# Face Attribute Demo in Camera Streams
+This demo will decode image urls for camera streams and show attributes of largest faces if exists
+Usages
+```
+python predict.py --url yourCameraImageURL
+```
+=================================================================================================================================
 -------------------------
 -------------------------
 
@@ -10,12 +50,6 @@ Using mxnet for face-related algorithm, here now only provide :
 * a trained lightened moon[1][2] model (combine the changed lightened cnn and moon loss) on **Face Attribute Prediction**, together with the training script, the single model get about *87.41%* accuracy on CelebA, and with only 18MB size.
 
 
-Before runing
------------
-```
-cd model
-./get-models.sh
-```
 * this will download the face alignned model used in [dlib](https://github.com/davisking/dlib), because in the face identification experiment, it will use face alignment technology before extractting face faceture.
 * using my slightly changed mxnet branch [face](https://github.com/tornadomeet/mxnet/tree/face) if you want to train/test the face attribution model.
 
