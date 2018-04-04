@@ -11,18 +11,39 @@ logger.setLevel(logging.INFO)
 import pdb
 
 
-def attribute(img, detector, face_cascade, devs, symbol, arg_params, aux_params, argssize):
-    # read img and drat face rect
+def detectFaces(img, detector):
     faces = detector(img, 1)
-    gray = np.zeros(img.shape[0:2])
-    if len(faces) == 0:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        opencv_faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-        print gray.shape
+    return faces
+    
+def detectFacesInCascade(img, face_cascade):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    opencv_faces = face_cascade.detectMultiScale(gray, 1.3, 5, 0, (20,20))
+    
+    faces = []
+    for (x,y,w,h) in opencv_faces:
+    #print x, y, x+w, y+h
+        faces.append(dlib.rectangle(int(x), int(y), int(x+w), int(y+h)))
+        
+    return faces
 
-        for (x,y,w,h) in opencv_faces:
-            print x, y, x+w, y+h
-            faces.append(dlib.rectangle(int(x), int(y), int(x+w), int(y+h)))
+def attribute(img, detector, face_cascade, devs, symbol, arg_params, aux_params, argssize):
+    h,w,c=img.shape
+    scale = max(h/240.0, w/320.0)
+    neww = int(w/scale)
+    newh = int(h/scale)
+    newimg = cv2.resize(img,(neww, newh))
+        
+    # read img and drat face rect
+    faces = detectFaces(newimg, detector)
+    if len(faces) == 0:
+        faces = detectFacesInCascade(newimg, face_cascade)
+    
+    gray = np.zeros(img.shape[0:2])
+
+            
+    for i in range(len(faces)):
+        faces[i] = dlib.rectangle(int(faces[i].left() *scale), int(faces[i].top()*scale), int(faces[i].right()*scale), int(faces[i].bottom()*scale))
+            
     font = cv2.FONT_HERSHEY_SIMPLEX
     if len(faces) > 0:
             max_face = max(faces, key=lambda rect: rect.width() * rect.height())
@@ -33,10 +54,9 @@ def attribute(img, detector, face_cascade, devs, symbol, arg_params, aux_params,
             top = int(max(0, max_face.top() - max_face.height()*float(pad[1])))
             right = int(min(gray.shape[1], max_face.right() + max_face.width()*float(pad[2])))
             bottom = int(min(gray.shape[0], max_face.bottom()+max_face.height()*float(pad[3])))
-            #print gray.shape
-
+            
             gray = gray[top:bottom, left:right]
-            #print gray.shape, left, right,  argssize
+            #print gray.shape, left, right, top, right,  argssize
             gray = cv2.resize(gray, (argssize, argssize))/255.0
             imgpred= np.expand_dims(np.expand_dims(gray, axis=0), axis=0)
             # get pred
@@ -76,7 +96,13 @@ def attribute(img, detector, face_cascade, devs, symbol, arg_params, aux_params,
 
 def main(args):
     symbol = lightened_moon_feature(num_classes=40, use_fuse=True)
-    devs = mx.cpu()
+    devs = None
+    if args.gpus is not None:
+        print("use gpu...")
+        devs = mx.gpu()
+    else:
+        print("use cpu...")
+        devs = mx.cpu()
     _, arg_params, aux_params = mx.model.load_checkpoint(args.model_load_prefix, args.model_load_epoch)
     detector = dlib.get_frontal_face_detector()
     face_cascade = cv2.CascadeClassifier(args.opencv)
@@ -93,7 +119,7 @@ def main(args):
         if temp_bytes:
             bytes+=temp_bytes
         else:
-            stream = urllib.urlopen(url)
+            stream = urllib.urlopen(args.url)
             bytes = ''
             temp_count = 16384
 
