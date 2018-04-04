@@ -51,10 +51,10 @@ def attribute(img, detector, face_cascade, devs, symbol, arg_params, aux_params,
             "Oval_Face","Pale_Skin","Pointy_Nose","Receding_Hairline","Rosy_Cheeks","Sideburns","Smiling","Straight_Hair",
             "Wavy_Hair","Wearing_Earrings","Wearing_Hat","Wearing_Lipstick","Wearing_Necklace","Wearing_Necktie","Young"]
             pred = np.ones(40)
-            print("attribution is:")
+            #print("attribution is:")
             cnt = 0 
             for i in range(40):
-                print text[i].rjust(20)+" : \t",
+                #print text[i].rjust(20)+" : \t",
                 if output[0][i] < 0:
                     pred[i] = -1
                     #print "No"
@@ -112,7 +112,7 @@ def main(args):
         frame = cv2.imdecode(np.fromstring(imbytes, dtype=np.uint8), cv2.IMREAD_COLOR)
         result = attribute(frame, detector, face_cascade, devs, symbol, arg_params, aux_params, args.size)
         cv2.imshow("demo", result)
-        cv2.waitKey(100)
+        cv2.waitKey(10)
 
 
 if __name__ == "__main__":
