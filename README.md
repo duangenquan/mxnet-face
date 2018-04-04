@@ -51,6 +51,13 @@ Usages
 ```
 python predict.py --url yourCameraImageURL
 ```
+or
+```
+python predict.py --url yourCameraImageURL --gpus 0
+```
+Note that, the speed on gpu is slower than that on cpu in my experiment.
+The possible reasons are, the attribute models are not very complex, or the versions of cuda&cudnn does not match.
+
 =================================================================================================================================
 -------------------------
 -------------------------
