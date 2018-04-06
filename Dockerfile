@@ -43,10 +43,11 @@ RUN cd ~ && \
     rm -rf ~/dlib-tmp
 
 COPY . /opt/app/
-RUN cd /opt/app/mxnet \ 
-    make -j 4 USE_OPENCV=1 USE_BLAS=openblas \
-    cd python \
-    pip install --upgrade pip \
+RUN cd /opt/app/mxnet && \
+    make clean && \ 
+    make -j 4 USE_OPENCV=1 USE_BLAS=openblas &&\
+    cd python && \
+    pip install --upgrade pip && \
     pip install -e .
 
 
