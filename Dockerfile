@@ -1,6 +1,3 @@
-# https://github.com/cmusatyalab/openface/blob/master/Dockerfile
-# https://github.com/cmusatyalab/openface/blob/master/opencv-dlib-torch.Dockerfile
-
 FROM ubuntu:16.04
 
 RUN apt-get update \
@@ -14,8 +11,8 @@ RUN apt-get update \
     cmake \
     curl \
     python2.7 \
-    libopenblas-dev \
     liblapack-dev \
+    libopenblas-dev \
     libopencv-dev \
     python-opencv \
     libboost-all-dev \
