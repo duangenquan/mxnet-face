@@ -20,13 +20,15 @@ sudo apt-get install -y libopenblas-dev liblapack-dev
 
 sudo apt-get install -y libopencv-dev
 
+sudo apt-get install -y python-dev python-setuptools python-pip libgfortran3
+
+
 for CPU:
     make -j 4 USE_OPENCV=1 USE_BLAS=openblas
 for GPU:
     make -j 4 USE_OPENCV=1 USE_BLAS=openblas USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1
     (Compile might be failed due to incorrect cudnn versions. I use v5.1 in my experiment and sucess) 
 
-sudo apt-get install -y python-dev python-setuptools python-pip libgfortran3
 
 cd python
 pip install --upgrade pip

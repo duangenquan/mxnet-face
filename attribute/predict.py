@@ -81,10 +81,10 @@ def attribute(img, detector, face_cascade, devs, symbol, arg_params, aux_params,
                 else:
                     pred[i] = 1
                     #print "Yes"
-                    cv2.putText(img, text[i], (20, 50 + cnt * 30), font, 1, (255,255,0), 2, cv2.LINE_AA) 
+                    cv2.putText(img, text[i], (20, 50 + cnt * 30), font, 1, (255,255,0), 2, cv2.CV_AA) 
                     cnt = cnt + 1
     else:
-        cv2.putText(img, "No detected faces", (20,  50), font, 1, (255,255,0), 2, cv2.LINE_AA)
+        cv2.putText(img, "No detected faces", (20,  50), font, 1, (255,255,0), 2, cv2.CV_AA)
 
     for f in faces:
         if f == max_face:
