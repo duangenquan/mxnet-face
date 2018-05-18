@@ -1,12 +1,13 @@
-# Using [MXNet](https://github.com/dmlc/mxnet) for Face-related Algorithm
+# Face Attribute Demo in Camera Streams with [MXNet](https://github.com/dmlc/mxnet) 
 
 This code is forked from https://github.com/tornadomeet/mxnet-face.
 
 Updates are:
-+ A demo for showing face attributes in camera streams
 + An easy setup instructions
++ A demo for showing face attributes in camera streams
 
-# Setup Instructions
+## Setup Instructions
+
 -----------
 
 Install mxnet (face) branch following https://mxnet.incubator.apache.org/install/index.html
@@ -47,7 +48,8 @@ cd model
 ./get-models.sh
 ```
 
-# Face Attribute Demo in Camera Streams
+## Face Attribute Demo in Camera Streams
+
 This demo will decode image urls for camera streams and show attributes of largest faces if exists
 Usages
 ```
@@ -60,8 +62,11 @@ python predict.py --url yourCameraImageURL --gpus 0
 Note that, the speed on gpu is slower than that on cpu in my experiment.
 The possible reasons are, the attribute models are not very complex, or the versions of cuda&cudnn does not match.
 
-=================================================================================================================================
+==================================================
 -------------------------
+
+Original README are as below.
+
 -------------------------
 
 About
@@ -121,7 +126,6 @@ then put the image you want to predict with name aaa.jpg and run in shell:
  ```python -u predict.py --img aaa.jpg```
  the example output will like this:  
  ![example_out.png](attribute/example_output.png)
-
 
 -----------
 ##### How to test
