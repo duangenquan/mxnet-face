@@ -1,16 +1,16 @@
 # Face Attribute Demo in Camera Streams with [MXNet](https://github.com/dmlc/mxnet) 
 
-This code is forked from https://github.com/tornadomeet/mxnet-face.
-
-Updates are:
+Highlights:
 + An easy setup instructions
 + A demo for showing face attributes in camera streams
+
+The testing environment is Ubuntu16.04.
 
 ## Setup Instructions
 
 -----------
 
-Install mxnet (face) branch following https://mxnet.incubator.apache.org/install/index.html
+Install [mxnet (face) branch](https://mxnet.incubator.apache.org/install/index.html). 
 ```
 unzip mxnet.zip
 cd mxnet
