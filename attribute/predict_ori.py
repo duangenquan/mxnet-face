@@ -67,7 +67,7 @@ def main():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="predict the face attribution of one input image")
     parser.add_argument('--gpus', type=str, help='the gpus will be used, e.g "0,1,2,3"')
-    parser.add_argument('--img', type=str, default='./1.jpg', help='the input img path')
+    parser.add_argument('--img', type=str, default='./test.jpg', help='the input img path')
     parser.add_argument('--size', type=int, default=128,
                         help='the image size of lfw aligned image, only support squre size')
     parser.add_argument('--opencv', type=str, default='../model/opencv/cascade.xml',

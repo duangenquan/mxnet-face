@@ -4,6 +4,7 @@
 
 + An easy setup instructions
 + A demo for showing face attributes in camera streams
++ A docker image to run a simple test in images
 
 The testing environment is Ubuntu16.04.
 
@@ -62,6 +63,24 @@ python predict.py --url yourCameraImageURL --gpus 0
 ```
 Note that, the speed on gpu is slower than that on cpu in my experiment.
 The possible reasons are, the attribute models are not very complex, or the versions of cuda&cudnn does not match.
+
+## Run samples in Docker
+
+```bash
+# Run demo with existing docker
+# Build your own docker by 
+docker build -t attimage .
+# or download exiting docker
+docker pull duangenquan/attimage
+# Start a container
+docker run -ti --rm -v /home/ubuntu:/var/ attimage /bin/bash
+# Run example
+cd /opt/app/attibute
+# Test image is downloaded from google
+python predict_ori.py
+```
+
+
 
 ==================================================
 -------------------------
