@@ -1,6 +1,7 @@
 # Face Attribute Demo in Camera Streams with [MXNet](https://github.com/dmlc/mxnet) 
 
-Highlights:
+## Highlights
+
 + An easy setup instructions
 + A demo for showing face attributes in camera streams
 
