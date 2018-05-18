@@ -77,7 +77,7 @@ docker run -ti --rm -v /home/ubuntu:/var/ duangenquan/attimage /bin/bash
 # Run example
 cd /opt/app/attribute
 # Test image is downloaded from google
-python predict_ori.py
+python predict_ori.py --img test.jpg
 ```
 
 ==================================================
