@@ -73,7 +73,7 @@ docker build -t attimage .
 # or download exiting docker
 docker pull duangenquan/attimage
 # Start a container
-docker run -ti --rm -v /home/ubuntu:/var/ attimage /bin/bash
+docker run -ti --rm -v /home/ubuntu:/var/ duangenquan/attimage /bin/bash
 # Run example
 cd /opt/app/attibute
 # Test image is downloaded from google
